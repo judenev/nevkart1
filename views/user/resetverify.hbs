@@ -1,0 +1,157 @@
+
+ <body onload="AamirFunction(),startTime() ,getot()">
+<div style="background-color:coral ;" class="container-fluid h-custom">
+       <div class="col-lg-4 col-md-4">
+
+                <a href="../Home" class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border px-3 mr-1">NEV</span>KART</h1>
+                </a>
+            </div>
+         <h1>User Login Page</h1>
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid"
+            alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+         
+       
+     
+       
+          <form action="/userresetotpverify" method="post"  >
+            <div class="d-flex justify-content-center align-items-center continer" >
+              <div class="card py-5 px-3" style="background-color:transparent; border-radius: 50px; border-color: black; box-shadow: 5px 5px 5px 10px rgb(173, 76, 19); border-style:hidden;">
+                <h5 class="m-0">Mobile phone verification</h5>
+                <span class="mobile-text"><b>Enter the code we just sent on your phone</b>
+                  <b class="text-color">+91 0{{this.number}}</b>
+                </span>
+                {{#if userotp }}
+                
+               {{else}}
+                <span style="color: crimson;" class="mobile-text"><b>OOps! you have entered Wrong Otp</b>
+               {{/if}}
+                </span>
+             
+
+                <div class="text-center mt-5" >
+                  <div id="change" class="d-flex flex-row mt-5">
+                    <input type="text" name="verify" value="{{this.number}}" hidden>
+                    <input style="margin-bottom:4% ;" r name="ver" maxlength="6" type="text" class="form-control" />
+
+
+                    <div class="text-center text-lg-start mt-4 ">
+                      
+                    </div>
+                    
+                  </div>
+                 
+                   <button type="submit" class="btn btn-primary btn-lg"
+                        style="">verify OTP</button>
+                 
+              
+          </form>
+                  <span class="d-block mobile-text" id="countdown"></span>
+                  <span class="d-block mobile-text" id="resendotp"></span>
+                  <form action="./userotp" method="post">
+                    <input  name="clientNumber" value="{{this.number}} " style="display:none ;"/>
+                    <div class="text-center text-lg-start mt-4 pt-2 "style="padding-left:34% ;padding-top: 3%; padding-bottom: 0%;" id="resend">
+                    <button onclick="timer(30)"  type="submit" class="btn btn-danger" >resend OTP</button>
+                    </div>
+                  </form>
+                  <h5 style="padding-left:2% ;padding-top: 3%; padding-bottom: 0%;">Or</h5>
+                   <form action="./accountreg" method="get">
+        
+        <div style="padding-left:25% ;" class="text-center text-lg-start mt-4 pt-2 ">
+            <button type="submit" class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Login with Email</button>
+           
+          </div>
+        </form>
+                </div>
+                </div>
+
+        
+        </div>
+      </div>
+   
+       
+    </div>
+    <script>
+       function timer(remaining) {
+       let timerOn = true;
+        var m = Math.floor(remaining / 60);
+        var s = remaining % 60;
+        m = m < 10 ? "0" + m : m;
+        s = s < 10 ? "0" + s : s;
+
+        document.getElementById("countdown").innerHTML = `Time left: ${m} : ${s}`;
+        remaining -= 1;
+        if (remaining >= 0 && timerOn) {
+          setTimeout(function () {
+            timer(remaining);
+          }, 1000);
+          document.getElementById("resendotp").innerHTML = ``;
+          return;
+        }
+        if (!timerOn) {
+
+          return;
+        }
+        document.getElementById("resendotp").innerHTML = `Sorry time exceeded `
+         document.getElementById("resend").hidden = true;
+ ;
+       
+
+      }
+    </script>
+    <script>
+ function AamirFunction(){
+     document.getElementById("resend").hidden = true;
+}
+    </script>
+         <script>
+          function startTime(){
+             let timerOn = true;
+      function timer(remaining) {
+        var m = Math.floor(remaining / 60);
+        var s = remaining % 60;
+        m = m < 10 ? "0" + m : m;
+        s = s < 10 ? "0" + s : s;
+
+        document.getElementById("countdown").innerHTML = `Time left: ${m} : ${s}`;
+        remaining -= 1;
+        if (remaining >= 0 && timerOn) {
+          setTimeout(function () {
+            timer(remaining);
+          }, 1000);
+          document.getElementById("resendotp").innerHTML = ``;
+          return;
+        }
+        if (!timerOn) {
+
+          return;
+        }
+        document.getElementById("resendotp").innerHTML = `Don't receive the code? `
+         document.getElementById("resend").hidden = false;
+ ;
+       
+
+      }
+      timer(57);
+      function resend() {
+        document.getElementById("change").style.visibility = "hidden";
+        
+      }
+
+          }
+     
+    </script>
+    <script>
+      function getot(){
+        document.getElementById('mobnum').style.display = "none";
+      }
+    </script>
+   
+      
+    </body>

@@ -1,0 +1,108 @@
+
+<body>
+    
+
+
+   <div  class=" mb-4" id="">
+         {{#each updateaddress }} 
+        <form action="/addressupdate/{{this.address.Addid}}" style="background-color:rgb(208, 255, 255) ;" method="post">
+            <h4 class="font-weight-semi-bold mb-4">User address Update</h4>
+            <div class="row">
+           
+                <div class="col-md-6 ">
+                    <label>Full Name</label>
+                    <input name="name" value="{{this.address.name}}" class="form-control" type="text" placeholder="{{this.address.name}}">
+                </div>
+
+                <div class="col-md-6">
+                    <label>E-mail</label>
+                  
+                    <input name="email" value="{{this.address.email}}" class="form-control" type="text" placeholder="{{this.address.email}}">
+                </div>
+                <div class="col-md-6 ">
+                    <label>Mobile No</label>
+                    <input name="Mobilenumber" value="{{this.address.Mobilenumber}}" class="form-control" type="text" placeholder="{{this.address.Mobilenumber}}">
+                </div>
+                <div class="col-md-6">
+                    <label>Address Line 1</label>
+                    <input name="deliveryaddress" value="{{this.address.deliveryaddress}}" class="form-control" type="text" placeholder="{{this.address.deliveryaddress}}">
+                </div>
+
+
+                <div class="col-md-6 form-group">
+                    <label>City</label>
+                    <input name="city" class="form-control" value="{{this.address.city}}" type="text" placeholder="{{this.address.city}}">
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>State</label>
+                    <input name="state" value="{{this.address.state}}" class="form-control" type="text" placeholder="{{this.address.state}}">
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>ZIP Code</label>
+                    <input name="zipCode" aria-placeholder="" value="{{this.address.zipCode}}" class="form-control" type="text" placeholder="{{this.address.zipCode}}">
+                </div>
+            </div>
+            <button class="btn btn-outline-warning" type="submit">Update Address</button>
+        </form>
+
+ {{/each}} 
+
+    </div>
+</body>
+   
+ 
+ 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+  <!-- Contact Javascript File -->
+  <script src="mail/jqBootstrapValidation.min.js"></script>
+  <script src="mail/contact.js"></script>
+
+  <!-- Template Javascript -->
+  <script src="js/main.js"></script>
+  {{!--
+  ==========================================================END===============================================================================================================
+  --}}
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+  <script src="/javascripts/script.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $('#userAddress').submit((e) => {
+      e.preventDefault()
+      $.ajax({
+        url: "/saveaddress",
+        method: 'post',
+        data: $('#userAddress').serialize(),
+        success: (response) => {
+        
+        //  location.reload(true)
+        }
+      })
+    })
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+  <script src="/javascripts/script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+  </script>
+  </body>

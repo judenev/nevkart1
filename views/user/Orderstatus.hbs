@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link rel="image" href="../images">
+
+  <!-- Bootstrap CSS -->
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <script src="/javascripts/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+  <title>NevKart</title>
+</head>
+
+<body>
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-4 col-md-4">
+
+        <a href="" class="text-decoration-none">
+          <h1 class="m-0 display-5 font-weight-semi-bold"><span
+              class="text-primary font-weight-bold border px-3 mr-1">NEV</span>KART</h1>
+        </a>
+      </div>
+      <div class="col-md-8 col-lg-8">
+
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+          <a href="" class="text-decoration-none d-block d-lg-none">
+            <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                class="text-primary font-weight-bold border px-3 mr-1"></span></h1>
+          </a>
+          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav mr-auto py-0">
+              <a style="font-size:larger; font-family: cursive" href="home"
+                class=" nav-item nav-link active kk">HOME</a>
+              <a style=" font-size:larger; font-family: cursive" href="/getpro/1"
+                class="nav-item nav-link active kk">PRODUCTS</a>
+              <a style=" font-size:larger; font-family: cursive" href="../../getwishlist"
+                class="nav-item nav-link active kk">WISH LIST</a>
+
+              <a style=" font-size:larger; font-family: cursive" href="../../Orderlist"
+                class=" nav-item nav-link active kk">ORDER STATUS</a>
+              <a style=" font-size:larger; font-family: cursive" href="../../userpro"
+                class=" nav-item nav-link active kk">PROFILE</a>
+            </div>
+            <div class="navbar-nav ml-auto py-0">
+
+              <a style="padding-top: 5%;padding-right: 5%;" href="../../userKart"><span id="cartcount"
+                  class="badge bg-success">{{this.cartcounts}}</span><svg xmlns="http://www.w3.org/2000/svg" width="30"
+                  height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                  <path
+                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                </svg></a>
+              <h4>
+
+
+
+              </h4>
+              {{#if this.userstatus}}
+              <div class="d-flex align-items-center ms-lg-auto mt-lg-0 mt-3 pe-2">
+                <span class=" me-2 fas fa-phone bg-light rounded-circle"></span>
+
+                <div class="d-flex flex-column ps-2">
+                  <form action="../../logout" method="post"><button class="btn btn-outline-danger" type="submit">
+                      logout</button>
+                  </form>
+                </div>
+              </div>
+              {{else}}
+              <div class="d-flex align-items-center ms-lg-auto mt-lg-0 mt-3 pe-2">
+                <span class=" me-2 fas fa-phone bg-light rounded-circle"></span>
+
+                <div class="d-flex flex-column ps-2">
+                  <form action="../../logout" method="post"><button class="btn btn-outline-success" type="submit">
+                      Login</button>
+                  </form>
+                </div>
+              </div>
+              {{/if}}
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+  <div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+      <div class="col-md-10">
+        <div class="rounded">
+          <div class="table-responsive table-borderless">
+            {{#if Ordered}}
+            <h1>Ordered succesfully</h1>
+            {{else if Orderedlist}}
+            <h1>Ordered History</h1>
+            {{else}}
+            <h1>You have no orders</h1>
+            {{/if}}
+
+            <table class="table">
+              <thead>
+                <tr>
+
+                  <th>Order id</th>
+                  {{!-- <th>product details</th> --}}
+
+
+
+                  <th>Order Placed on</th>
+                  <th>Payment Type</th>
+                  <th>Order Payment Status</th>
+
+                </tr>
+              </thead>
+
+              <tbody class="table-body">
+                {{#each orderDetails}}
+                <tr class="cell-1">
+
+
+                  <td><a style="text-decoration: none;" href="../Orderlist/{{this._id}}"> <button
+                        class="btn btn-info">View More</button></a></td>
+
+
+
+
+                  {{!-- <td> {{#each ../product}}<img src="../../images/{{this.product.[0].product.file.[0].filename}}"
+                      class="img-fluid" alt="Phone"> {{/each}}</td> --}}
+
+                  <td>{{this.Orderdetails.ordered_on}}</td>
+                  <td><Strong style="color: red;">{{this.Orderdetails.PaymentMethod}}</Strong></td>
+                  <td>{{this.Orderdetails.DeliveryStatus}}</td>
+
+                  <td>
+                    <form action="../../Orderstatus/" method="post">
+                      <input style="display: none;" name="OrderId" type="text" value="{{../orderId}}">
+                      <input style="display: none;" name="proId" type="text" value="{{this.item}}">
+
+
+
+
+                    </form>
+                  </td>
+
+                </tr>
+                {{/each}}
+
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{!-- ==================================Order new starts here ============================================= --}}
+  <section class="h-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-10 col-xl-8">
+          <div class="card" style="border-radius: 10px;" >
+            <div class="card-header px-4 py-5">
+
+              <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">{{name}}</span>!</h5>
+            </div>
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="lead fw-normal mb-0" style="color: #a8729a;">Order Details</p>
+                <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p>
+              </div>
+        {{#if delivered}}
+             <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Invoice</button>
+             {{else}}
+             {{/if}}
+              <div class="card shadow-0 border mb-4 p-0">
+                {{#each product}}
+
+                <div class="card-body ">
+
+                  <div class="row">
+                    {{!-- {{#each pro}} --}}
+                    <div class="col-md-2">
+                      <img src="../../images/{{this.product.[0].product.file.image1.[0].filename}}" class="img-fluid"
+                        alt="Phone">
+                      <p class="text-muted mb-0 small"><Strong style="color: blue;">
+                          Status:</Strong><br>{{this.status}}</p>
+                    </div>
+                    {{!-- {{/each}} --}}
+
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small"> <Strong style="color: blue;"> Product
+                          Name:</Strong><br>{{this.product.[0].product.productname}}</p>
+                    </div>
+
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small"><Strong style="color: blue;"> Ordered On:</Strong><br>
+                        <span class="date">{{../j.Orderdetails.ordered_on}}</span>
+
+                      </p>
+                    </div>
+
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">Qty:{{this.stock}}</p>
+                    </div>
+
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      {{#eq this.product.[0].product.discprice this.product.[0].product.price }}
+                      <p class="text-muted mb-0 small"> Price:₹{{this.product.[0].product.price}}</p>
+                      {{else}}
+                      <strike>
+                        <p class="text-muted mb-0 small"> Price:₹{{this.product.[0].product.price}}</p>
+                      </strike>
+                      <p class="text-muted mb-0 small" style="color: rgb(128, 0, 11); !important">Discount
+                        Price:₹{{this.product.[0].product.discprice}}</p>
+                      {{/eq}}
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      {{#if ../delivered }}
+                      <form action="../../Orderstatus/" method="post">
+                        <input style="display: none;" name="OrderId" type="text" value="{{../orderId}}">
+                        <input style="display: none;" name="return" type="text" value="done">
+                        <input style="display: none;" name="proId" type="text" value="{{this.item}}">
+                        <div id="editor"></div>
+
+                        {{!-- <a href="javascript:void(0)" onclick="print()">Download PDF </a> --}}
+                        {{#when this.status 'eq'"Order returned by user"}}
+                        <h6 style="color:rgb(47, 0, 255)">Order Returned</h6>
+                        {{else}}
+                        
+                        <button class="btn btn-outline-info" style="max-width:100%;height:80%;"
+                          type="submit">Return</button>
+                        {{/when}}
+
+
+
+                      </form>
+
+                      {{else}}
+                      <form action="../../Orderstatus/" method="post">
+                        <input style="display: none;" name="OrderId" type="text" value="{{../orderId}}">
+                        <input style="display: none;" name="proId" type="text" value="{{this.item}}">
+                        <input style="display: none;" name="stock" type="text" value="{{this.stock}}">
+
+
+
+                        {{#when this.status 'eq'"Order cancelled by user"}}
+                        <h6 style="color:red">Order Cancelled</h6>
+                        {{else}}
+                        <button class="btn btn-outline-warning" style="max-width:100%;height:80%;"
+                          type="submit">Cancel</button>
+                        {{/when}}
+
+                      </form>
+                      {{/if}}
+
+                    </div>
+
+                  </div>
+                  <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                  <div class="row d-flex align-items-center">
+                    <div class="col-md-2">
+                      <p class="text-muted mb-0 small">Track Order</p>
+                    </div>
+                    {{!-- <div class="col-md-10">
+                      <div class="progress" style="height: 6px; border-radius: 16px;">
+                        {{#if this.status}}
+                        <div class="progress-bar" role="progressbar"
+                          style="width: 30%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                        {{#else }}
+                        <div class="progress-bar" role="progressbar"
+                          style="width: 30%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                        {{/if}}
+                      </div>
+                      <div class="d-flex justify-content-around mb-1">
+                        <p class="text-muted mt-1 mb-0 small ms-xl-5">Out for delivary</p>
+                        <p class="text-muted mt-1 mb-0 small ms-xl-5">Pending</p>
+                        <p class="text-muted mt-1 mb-0 small ms-xl-5">Delivered</p>
+                      </div>
+                    </div> --}}
+                  </div>
+                </div>
+                {{/each}}
+              </div>
+
+
+              <div class="d-flex justify-content-between pt-2">
+                <p class="fw-bold mb-0">Order Details</p>
+
+                <div >
+                  {{#if j.Orderdetails.Discount}}
+                  <p class="text-muted mb-0" style="color: green;"> <span class="fw-bold me-4"
+                      style="color: green;">Applied Coupon:</span> {{j.Orderdetails.Couponname}}</p>
+                  <p class="text-muted mb-0" style="color: green;"> <span class="fw-bold me-4" style="color: green;">You
+                      save:</span> -₹ {{j.Orderdetails.couponDiscount}}</p>
+                  <p class="text-muted mb-0"><span class="fw-bold me-4">Total with discount coupon:</span>₹
+                    {{j.Orderdetails.total}}</p>
+                  {{else}}
+                  <p class="text-muted mb-0"><span class="fw-bold me-4">Total without discount</span>₹
+                    {{j.Orderdetails.total}}</p>
+                  {{/if}}
+                </div>
+
+              </div>
+
+              <div class="pt-2">
+                Address :
+                {{#with addressdatas.[0]}}
+                {{this.address.name}} <br>
+                {{this.address.deliveryaddress}}<br>
+                {{this.address.city}}<br>
+                {{this.address.state}}<br>
+                {{this.address.zipCode}}<br>
+                Mob:{{this.address.Mobilenumber}} <br>
+                Track Id:{{this._id}}<br>
+
+
+
+                {{/with}}
+
+              </div>
+
+
+
+
+
+            </div>
+            <div class="card-footer border-0 px-4 py-5"
+              style="background-color: #a8729a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+              <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total
+                : <span class="h2 mb-0 ms-2">₹ {{j.Orderdetails.total}}</span></h5>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{!-- ,modal starts here --}}
+  <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="card" style="border-radius: 10px;" id="whatToPrint">
+            <div class="card-header px-4 py-5">
+
+              <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">{{name}}</span>!</h5>
+            </div>
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="lead fw-normal mb-0" style="color: #a8729a;">Order Details</p>
+                <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p>
+              </div>
+        {{#if delivered}}
+             <a href="javascript:generatePDF()" id="downloadButton">download Invoice</a>
+             {{else}}
+             {{/if}}
+              <div class="card shadow-0 border mb-4 p-0">
+                {{#each product}}
+
+                <div class="card-body ">
+
+                  <div class="row">
+                    {{!-- {{#each pro}} --}}
+                    <div class="col-md-2">
+                      <img src="../../images/{{this.product.[0].product.file.image1.[0].filename}}" class="img-fluid"
+                        alt="Phone">
+                      <p class="text-muted mb-0 small"><Strong style="color: blue;">
+                          Status:</Strong><br>{{this.status}}</p>
+                    </div>
+                    {{!-- {{/each}} --}}
+
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small"> <Strong style="color: blue;"> Product
+                          Name:</Strong><br>{{this.product.[0].product.productname}}</p>
+                    </div>
+
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small"><Strong style="color: blue;"> Ordered On:</Strong><br>
+                        <span class="date">{{../j.Orderdetails.ordered_on}}</span>
+
+                      </p>
+                    </div>
+
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">Qty:{{this.stock}}</p>
+                    </div>
+
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      {{#eq this.product.[0].product.discprice this.product.[0].product.price }}
+                      <p class="text-muted mb-0 small"> Price:₹{{this.product.[0].product.price}}</p>
+                      {{else}}
+                      <strike>
+                        <p class="text-muted mb-0 small"> Price:₹{{this.product.[0].product.price}}</p>
+                      </strike>
+                      <p class="text-muted mb-0 small" style="color: rgb(128, 0, 11); !important">Discount
+                        Price:₹{{this.product.[0].product.discprice}}</p>
+                      {{/eq}}
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      {{#if ../delivered }}
+                      <form action="../../Orderstatus/" method="post">
+                        <input style="display: none;" name="OrderId" type="text" value="{{../orderId}}">
+                        <input style="display: none;" name="return" type="text" value="done">
+                        <input style="display: none;" name="proId" type="text" value="{{this.item}}">
+                        <div id="editor"></div>
+
+                        {{!-- <a href="javascript:void(0)" onclick="print()">Download PDF </a> --}}
+                       
+
+
+
+                      </form>
+
+                      {{else}}
+                      <form action="../../Orderstatus/" method="post">
+                        <input style="display: none;" name="OrderId" type="text" value="{{../orderId}}">
+                        <input style="display: none;" name="proId" type="text" value="{{this.item}}">
+                        <input style="display: none;" name="stock" type="text" value="{{this.stock}}">
+
+
+
+                        {{#when this.status 'eq'"Order cancelled by user"}}
+                        <h6 style="color:red">Order Cancelled</h6>
+                        {{else}}
+                      
+                        
+                        <h6 style="color:red">Payment Pending</h6>
+                     
+                        <button class="btn btn-outline-warning" style="max-width:100%;height:80%;"
+                          type="submit">Cancel</button>
+                        <h6>{{j.Orderdetails.DeliveryStatus}}</h6>
+                      
+                       
+                        {{/when}}
+
+                      </form>
+                      {{/if}}
+
+                    </div>
+
+                  </div>
+                  <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                  <div class="row d-flex align-items-center">
+                    <div class="col-md-2">
+                      <p class="text-muted mb-0 small">Track Order</p>
+                    </div>
+                    {{!-- <div class="col-md-10">
+                      <div class="progress" style="height: 6px; border-radius: 16px;">
+                        {{#if this.status}}
+                        <div class="progress-bar" role="progressbar"
+                          style="width: 30%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                        {{#else }}
+                        <div class="progress-bar" role="progressbar"
+                          style="width: 30%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                        {{/if}}
+                      </div>
+                      <div class="d-flex justify-content-around mb-1">
+                        <p class="text-muted mt-1 mb-0 small ms-xl-5">Out for delivary</p>
+                        <p class="text-muted mt-1 mb-0 small ms-xl-5">Pending</p>
+                        <p class="text-muted mt-1 mb-0 small ms-xl-5">Delivered</p>
+                      </div>
+                    </div> --}}
+                  </div>
+                </div>
+                {{/each}}
+              </div>
+
+
+              <div class="d-flex justify-content-between pt-2">
+                <p class="fw-bold mb-0">Order Details</p>
+
+                <div >
+                  {{#if j.Orderdetails.Discount}}
+                  <p class="text-muted mb-0" style="color: green;"> <span class="fw-bold me-4"
+                      style="color: green;">Applied Coupon:</span> {{j.Orderdetails.Couponname}}</p>
+                  <p class="text-muted mb-0" style="color: green;"> <span class="fw-bold me-4" style="color: green;">You
+                      save:</span> -₹ {{j.Orderdetails.couponDiscount}}</p>
+                  <p class="text-muted mb-0"><span class="fw-bold me-4">Total with discount coupon:</span>₹
+                    {{j.Orderdetails.total}}</p>
+                  {{else}}
+                  <p class="text-muted mb-0"><span class="fw-bold me-4">Total without discount</span>₹
+                    {{j.Orderdetails.total}}</p>
+                  {{/if}}
+                </div>
+
+              </div>
+
+              <div class="pt-2">
+                Address :
+                {{#with addressdatas.[0]}}
+                {{this.address.name}} <br>
+                {{this.address.deliveryaddress}}<br>
+                {{this.address.city}}<br>
+                {{this.address.state}}<br>
+                {{this.address.zipCode}}<br>
+                Mob:{{this.address.Mobilenumber}} <br>
+                Track Id:{{this._id}}<br>
+
+
+
+                {{/with}}
+
+              </div>
+
+
+
+
+
+            </div>
+            <div class="card-footer border-0 px-4 py-5"
+              style="background-color: #a8729a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+              <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total
+                : <span class="h2 mb-0 ms-2">₹ {{j.Orderdetails.total}}</span></h5>
+            </div>
+          
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+      </div>
+    </div>
+  </div>
+</div>
+
+  {{!-- modal ends here --}}
+
+  <!-- Footer Start -->
+  <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+    <div class="row px-xl-5 pt-5">
+      <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+        <a href="" class="text-decoration-none">
+          <h1 class="mb-4 display-5 font-weight-semi-bold"><span
+              class="text-primary font-weight-bold border border-white px-3 mr-1">Nev</span>Kart</h1>
+        </a>
+        {{!-- <p>Dolore erat dolor sit lorem vero amet. Sed sit lorem magna, ipsum no sit erat lorem et magna ipsum
+          dolore amet erat.</p> --}}
+        <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
+        <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>Nevkart@gmail.com</p>
+        <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+      </div>
+      <div class="col-lg-8 col-md-12">
+        <div class="row">
+
+          <div class="col-md-4 mb-5">
+            <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+            <div class="d-flex flex-column justify-content-start">
+              <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+              <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our
+                Shop</a>
+              <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop
+                Detail</a>
+              <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping
+                Cart</a>
+              <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+              <a class="text-dark" href=""><i class=" fa fa-angle-right mr-2"></i>Contact
+                Us</a>
+            </div>
+          </div>
+          <div class="col-md-4 mb-5">
+            <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
+            <form action="">
+              <div class="form-group">
+                <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control border-0 py-4" placeholder="Your Email" required="required" />
+              </div>
+              <div>
+                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe
+                  Now</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row border-top border-light mx-xl-5 py-4">
+      <div class="col-md-6 px-xl-0">
+        <p class="mb-md-0 text-center text-md-left text-dark">
+          &copy; <a class="text-dark font-weight-semi-bold" href="#">NevKart</a>. All Rights Reserved.
+          Designed
+          by
+          <a class="text-dark font-weight-semi-bold" href="#">jude nevin</a>
+        </p>
+      </div>
+      <div class="col-md-6 px-xl-0 text-center text-md-right">
+        <img class="img-fluid" src="img/payments.pn0636g" alt="">
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+        async function generatePDF() {
+            document.getElementById("downloadButton").innerHTML = "Invoice is here";
+
+            //Downloading
+            var downloading = document.getElementById("whatToPrint");
+            var doc = new jsPDF('l', 'pt');
+
+            await html2canvas(downloading, {
+                //allowTaint: true,
+                //useCORS: true,
+                width: 700
+            }).then((canvas) => {
+                //Canvas (convert to PNG)
+                doc.addImage(canvas.toDataURL("image/png"), 'PNG', 50, 5, 500, 600);
+            })
+
+            doc.save("Document.pdf");
+
+            //End of downloading
+
+            document.getElementById("downloadButton").innerHTML = "Click to download Invoice";
+        }
+    </script>
+  {{!-- <script type="text/javascript">
+    document.getElementById('download-pdf').onclick = function () {
+      var element = document.getElementById('jude')
+      var opt = {
+        margin: 0.1,
+        filename: 'myfile.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf(element, opt);
+    };
+
+  </script> --}}
+  <!-- Footer End -->
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+  {{!--
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  --}}
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+  <script src="/javascripts/script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+
+  </script>
+
+
+
+
+
+
+
+</body>
+
+</html>
