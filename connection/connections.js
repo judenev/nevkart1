@@ -3,7 +3,8 @@ const { GridFsStorage } = require('multer-gridfs-storage');
 const multer = require('multer');
 
 const Grid = require('gridfs-stream');
-const mongoURI = 'mongodb://localhost:27017'
+const mongoURI = "mongodb+srv://judenevin96:D6jhk67NWiPYTPH0@nevkart.gcox4nt.mongodb.net/?retryWrites=true&w=majority";
+
 const state = {
     db: null,
     gfs: null,
