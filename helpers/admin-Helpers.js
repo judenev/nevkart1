@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt')
 const ObjectId = require('mongodb').ObjectId
 const accountSID = "AC54fbbc7bc94b60cdd2a36eb85fab59e0"
 const serviceSID = "VA048467ff548984373c0e303417a34c1b"
-const authToken = "eb2db8f2cc009ba5ca93bdbdc54faa9f"
+const authToken = "0553abec342c12ca730deba61aef379c"
 
 const adminotp = require('twilio')(accountSID, authToken)
 
